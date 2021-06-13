@@ -1,21 +1,28 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import WelcomeScreen from "./app/screens/WelcomeScreen";
+import {useFonts, Raleway_200ExtraLight} from "@expo-google-fonts/raleway";
+import AccountScreen from "./app/screens/AccountScreen";
+import LoginScreen from "./app/screens/LoginScreen";
+import RegisterScreen from "./app/screens/RegisterScreen";
+import ListItemSeparator from "./app/components/ListItemSeparator";
+import ListingScreen from "./app/screens/ListingScreen";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+
+    let [fontLoaded, error] = useFonts({
+        Raleway_200ExtraLight,
+
+        "Iran": require("./app/assets/fonts/Vazir.ttf"),
+    })
+
+    if (!fontLoaded) {
+        <WelcomeScreen/>
+
+    }
+
+    return (
+        <RegisterScreen/>
+    )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
