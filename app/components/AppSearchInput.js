@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
         padding: 15,
         borderColor: '#e2e2e2',
         borderWidth: 1,
-        marginBottom: 20,
 
     },
     icon: {
@@ -38,15 +37,19 @@ const styles = StyleSheet.create({
     },
     iconToggle: {
 
-        flex: 1,
-        left: 235,
-        top: 2,
+        position: "absolute",
+        right: 20,
+        top: 20,
 
     },
     line: {
         width: 1,
         height: 30,
-        marginRight: 40,
+
+        position: "absolute",
+        right: 50,
+        top: 18,
+
         backgroundColor: "#d4d4d4",
     }
 })

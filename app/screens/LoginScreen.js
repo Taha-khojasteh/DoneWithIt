@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, StyleSheet} from "react-native";
+import {Image, KeyboardAvoidingView, StyleSheet} from "react-native";
 import Screen from "../components/Screen";
 import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/Button";
@@ -13,12 +13,12 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(6).label("Password"),
 })
 
-function LoginScreen(props) {
+function LoginScreen({navigation}) {
 
 
     return (
-
         <Screen style={styles.container}>
+
             <Image
                 style={styles.logo}
                 source={require("../assets/Tarana.jpg")}/>
@@ -30,6 +30,7 @@ function LoginScreen(props) {
             >
                 {({handleChange, handleSubmit, errors, setFieldTouched, touched}) => (
                     <>
+                        <KeyboardAvoidingView behavior={"height"}>
                         <AppTextInput
                             icon="email"
                             autoCapitalize="none"
@@ -54,17 +55,16 @@ function LoginScreen(props) {
                         />
                         <AppErrorMessage error={errors.password} visible={touched.password}/>
 
-                        <AppButton title="Login" onPress={handleSubmit} style={styles.button} color="secondary"/>
+                        <AppButton title="Login" onPress={handleSubmit} style={styles.button} color="secondary" />
+                            </KeyboardAvoidingView>
                     </>
                 )}
             </Formik>
 
-
         </Screen>
 
 
-    )
-        ;
+    );
 }
 
 const styles = StyleSheet.create({
@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
         alignSelf: "center",
         marginTop: 50,
         marginBottom: 30,
+        borderRadius:100,
     },
     button: {
         alignSelf: "center",

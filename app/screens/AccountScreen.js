@@ -1,12 +1,12 @@
 import React from 'react';
 import Screen from "../components/Screen";
 import ListItem from "../components/ListItem";
-import {FlatList, StyleSheet, View} from "react-native";
+import {FlatList, StyleSheet, Text, View} from "react-native";
 import Colors from "../config/colors"
 import Icon from "../components/Icon";
 import colors from "../config/colors";
 import ListItemSeparator from "../components/ListItemSeparator";
-
+import {productName} from "expo-device";
 
 const menuItems = [
     {
@@ -14,7 +14,8 @@ const menuItems = [
         icon: {
             name: "format-list-bulleted",
             backgroundColor: Colors.primary,
-        }
+        },
+        target:"Heading"
 
     },
     {
@@ -22,11 +23,12 @@ const menuItems = [
         icon: {
             name: "email",
             backgroundColor: Colors.secondary,
-        }
+        },
+        target:"Messages"
     }
 ]
 
-function AccountScreen(props) {
+function AccountScreen({navigation}) {
     return (
         <Screen style={styles.screen}>
             <View style={styles.container}>
@@ -37,7 +39,10 @@ function AccountScreen(props) {
                           keyExtractor={menuItems => menuItems.title}
                           ItemSeparatorComponent={ListItemSeparator}
                           renderItem={({ item }) => <ListItem title={item.title}
-                                                              ImageComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor}/>}  />}/>
+                                                              ImageComponent={<Icon name={item.icon.name} backgroundColor={item.icon.backgroundColor}/>}
+                                                              onPress={()=> navigation.navigate("Messages")}  />}
+
+                />
             </View>
             <View>
                 <ListItem
@@ -46,11 +51,9 @@ function AccountScreen(props) {
                     <Icon name="logout"  backgroundColor="#f4a261"/>
                 }
                 />
-                <ListItem
 
-                    title="Download" ImageComponent={
-                    <Icon name="file-download" backgroundColor={colors.secondary}/>
-                } />
+
+                <Text style={styles.brand}>{productName}</Text>
             </View>
         </Screen>
     );
@@ -62,6 +65,12 @@ const styles = StyleSheet.create({
     },
     container: {
         marginVertical: 20,
+    },
+    brand:{
+        alignSelf:"center",
+        marginTop:30,
+        color:colors.medium,
+
     }
 })
 export default AccountScreen;

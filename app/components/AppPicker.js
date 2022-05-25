@@ -8,30 +8,36 @@ import colors from "../config/colors";
 import PickerItem from "./PickerItem";
 import Icon from "./Icon";
 
-function AppPicker({icon , items,onSelectItem,selectedItem,children,...Props}) {
+function AppPicker({icon, items, selectedItem, children, ...Props}) {
     const [modalBol, setModealBol] = useState(false)
 
     return (
         <>
-        <TouchableWithoutFeedback onPress={() => setModealBol(true)}>
-            <View style={styles.container}>
-                <MaterialIcons name={icon} size={25} color={styleFont.colors.medium} style={styles.icon}/>
-                <AppText  {...Props} style={[styleFont.text, styles.text]} >
-                    {selectedItem ? selectedItem.label : children}
-                </AppText>
-                <MaterialCommunityIcons name="chevron-down" size={30} color={styleFont.colors.medium} />
-            </View>
-        </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => setModealBol(true)}>
+                <View style={styles.container}>
+                    <MaterialIcons name={icon} size={25} color={styleFont.colors.medium} style={styles.icon}/>
+                    <AppText  {...Props} style={[styleFont.text, styles.text]}>
+                        {selectedItem ? selectedItem.label : children}
+                    </AppText>
+                    <MaterialCommunityIcons name="chevron-down" size={30} color={styleFont.colors.medium}/>
+                </View>
+            </TouchableWithoutFeedback>
             <Modal visible={modalBol} animationType="slide">
-                        <FlatList data={items} keyExtractor={items=> items.val.toString()} renderItem={({item}) => (
-                            <PickerItem label={item.label} onPress={() => {
-                                setModealBol(false);
-                                onSelectItem(item)
-                            }
-                            }/>
-                        )}/>
-                <Button title="exit" onPress={() => setModealBol(false)}  style={styles.butt}/>
+                <FlatList data={items}
 
+                          keyExtractor={items => items.val.toString()}
+                          numColumns={3}
+                          renderItem={({item}) => (
+                              <PickerItem
+
+                                  item={item}
+                                  label={item.label} onPress={() => {
+                                  setModealBol(false);
+                                  onSelectItem(item)
+                              }
+                              }/>
+                          )}/>
+                <Button title="exit" onPress={() => setModealBol(false)} style={styles.butt}/>
 
 
             </Modal>
@@ -42,7 +48,7 @@ function AppPicker({icon , items,onSelectItem,selectedItem,children,...Props}) {
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         backgroundColor: styleFont.colors.light,
         width: "100%",
         borderRadius: 25,
@@ -51,22 +57,22 @@ const styles = StyleSheet.create({
         padding: 15,
     },
 
-    icon:{
+    icon: {
         marginVertical: 5,
         paddingRight: 8,
     },
 
-    text:{
+    text: {
         flex: 1,
-        marginVertical:5,
+        marginVertical: 5,
     },
-    butt:{
-        marginHorizontal:50,
+    butt: {
+        marginHorizontal: 30,
         marginVertical: 20,
         flexDirection: "row",
 
     },
-    background:{
+    background: {
         backgroundColor: colors.medium
     }
 })

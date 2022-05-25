@@ -5,7 +5,7 @@ import {MaterialCommunityIcons} from "@expo/vector-icons";
 import AppTextInput from "./AppTextInput";
 
 function AppPasswordInput(props) {
-        const [eye, setEye] = useState(false);
+        const [eye, setEye] = useState(true);
 
     return (
         <AppTextInput
@@ -29,8 +29,8 @@ function AppPasswordInput(props) {
 const styles = StyleSheet.create({
      iconPassword: {
         position: "absolute",
-        left:325,
-        top:17
+        right:25,
+        top:17,
     },
 })
 

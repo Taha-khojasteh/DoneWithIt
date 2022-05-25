@@ -10,6 +10,7 @@
       "resizeMode": "contain",
       "backgroundColor": "#fff"
     },
+
     "updates": {
       "fallbackToCacheTimeout": 0
     },
@@ -29,6 +30,6 @@
     "web": {
       "favicon": "./app/assets/favicon.png"
     },
-    "description": "this app is just and test to see on other devices made by me so please if you're not interested to see my test application don't download this app  "
+    "description": "VERSION : 0.2       TEST\nwhere people sell their product "
   }
 }

@@ -1,28 +1,19 @@
 import React from 'react';
-import WelcomeScreen from "./app/screens/WelcomeScreen";
-import {useFonts, Raleway_200ExtraLight} from "@expo-google-fonts/raleway";
-import AccountScreen from "./app/screens/AccountScreen";
-import LoginScreen from "./app/screens/LoginScreen";
-import RegisterScreen from "./app/screens/RegisterScreen";
-import ListItemSeparator from "./app/components/ListItemSeparator";
-import ListingScreen from "./app/screens/ListingScreen";
+import {NavigationContainer} from '@react-navigation/native'
+import NavigationTheme from "./app/navigation/NavigationTheme";
+import AppNavigator from "./app/navigation/AppNavigator";
+import {Text} from "react-native";
+import Screen from "./app/components/Screen";
+import {osBuildId,productName} from "expo-device";
+import AuthNavigator from "./app/navigation/AuthNavigator";
+import JustCallIt from "./app/screens/JustCallIt";
+
 
 export default function App() {
-
-
-    let [fontLoaded, error] = useFonts({
-        Raleway_200ExtraLight,
-
-        "Iran": require("./app/assets/fonts/Vazir.ttf"),
-    })
-
-    if (!fontLoaded) {
-        <WelcomeScreen/>
-
-    }
-
     return (
-        <RegisterScreen/>
+         <NavigationContainer theme={NavigationTheme}>
+             <AppNavigator/>
+         </NavigationContainer>
     )
 }
 

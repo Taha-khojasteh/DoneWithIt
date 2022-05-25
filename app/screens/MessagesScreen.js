@@ -1,36 +1,70 @@
-import React, {useState} from 'react';
-import {FlatList, StyleSheet, View} from "react-native";
+import React, {useEffect, useState} from 'react';
+import {FlatList, StatusBar, StyleSheet} from "react-native";
 import ListItem from "../components/ListItem";
 import Screen from "../components/Screen";
-import colors from "../config/colors";
 import ListItemSeparator from "../components/ListItemSeparator";
 import ListItemDelete from "../components/ListItemDelete";
+import * as Permission from "expo-permissions";
+import * as Notifications from "expo-notifications";
+
+
 
 
 const initialMessages = [
     {
         id: 1,
-        title: "t1",
-        description: " D1",
+        title: "Steven Hamburgers",
+        description: "I just want let you know that you ...",
         image: require("../assets/4.png")
     },
     {
         id: 2,
-        title: "t2  ",
-        description: "D2",
+        title: "Steven Hamburgers",
+        description: "I just want let you know that you ...",
         image: require("../assets/2.png")
     },
     {
         id: 3,
-        title: "t5",
-        description: "Description is about all",
+        title: "Steven Hamburgers",
+        description: "I just want let you know that you ...",
         image: require("../assets/Tarana.jpg")
     }
 ]
 
 function MessagesScreen(props) {
-    const [messages , setMessages] = useState(initialMessages);
-    const [refreshing , setRefreshing] = useState(false)
+    const [messages, setMessages] = useState(initialMessages);
+    const [refreshing, setRefreshing] = useState(false)
+
+    Notifications.setNotificationHandler({
+        handleNotification: async () => ({
+            shouldShowAlert: true,
+            shouldPlaySound: true,
+            shouldSetBadge: false,
+        }),
+    });
+
+
+    const PermissionAndNotificationSetup = async () => {
+        try {
+            const NotificationPermission = await Permission.askAsync(Permission.NOTIFICATIONS)
+            if (!NotificationPermission.granted) return
+
+
+            const notificationToken = await Notifications.getExpoPushTokenAsync()
+            console.log(notificationToken)
+        } catch (e) {
+            console.log(e)
+        }
+
+    }
+
+
+
+    useEffect(() => {
+        PermissionAndNotificationSetup()
+    }, [])
+
+
 
     const handleDelete = message => {
         //Delete from massages
@@ -40,6 +74,7 @@ function MessagesScreen(props) {
 
     return (
         <Screen>
+            <StatusBar/>
             <FlatList data={messages}
                       renderItem={({item}) => <ListItem
                           title={item.title} subtitle={item.description}
@@ -55,7 +90,7 @@ function MessagesScreen(props) {
                               id: 3,
                               title: "t5",
                               description: "Description is about all",
-                              image: require("../assets/fatemeh.jpg")
+                              image: require("../assets/avatar.jpg")
                           },
                       ])}
             />
@@ -63,7 +98,6 @@ function MessagesScreen(props) {
     );
 }
 
-const styles = StyleSheet.create({
-}
+const styles = StyleSheet.create({}
 )
 export default MessagesScreen;

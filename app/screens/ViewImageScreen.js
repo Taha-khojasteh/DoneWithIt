@@ -14,7 +14,7 @@ function ViewImageScreen(props) {
             <Image
                 resizeMode="contain"
                 style={styles.backgroundImage}
-                source={require("../assets/fatemeh.jpg")}/>
+                source={require("../assets/avatar.jpg")}/>
 
         </View>
     );
